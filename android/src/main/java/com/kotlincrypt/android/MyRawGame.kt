@@ -26,6 +26,7 @@ class MyRawGame : ApplicationListener {
         batch.begin()
         font.draw(batch, "cos działa", 100f, 300f)
         batch.end()
+
     }
 
     override fun resize(width: Int, height: Int) {

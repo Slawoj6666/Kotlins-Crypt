@@ -15,5 +15,6 @@ class GameActivity : AndroidApplication() {
         }
 
         initialize(MyRawGame(), config)
+
     }
 }
