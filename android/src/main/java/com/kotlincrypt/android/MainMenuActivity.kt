@@ -1,26 +1,23 @@
-package com.kotlincrypt.android;
+package com.kotlincrypt.android
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.widget.Button
 
-public class MainMenuActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+class MainMenuActivity : Activity() {
 
-        Button startButton = new Button(this);
-        startButton.setText("Start libGDX Game");
-        setContentView(startButton);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainMenuActivity.this, GameActivity.class);
-                startActivity(intent);
+        val startButton = Button(this).apply {
+            text = "Start libGDX Game"
+            setOnClickListener {
+                val intent = Intent(this@MainMenuActivity, GameActivity::class.java)
+                startActivity(intent)
             }
-        });
+        }
+
+        setContentView(startButton)
     }
 }
