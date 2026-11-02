@@ -11,4 +11,11 @@
         android:layout_height="wrap_content"
         android:text="@string/start_libgdx_game" />
 
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings" />
+
+
 </LinearLayout>
