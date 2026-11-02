@@ -25,8 +25,6 @@ public class MyRawGame implements ApplicationListener {
 
     @Override
     public void render() {
-        // Update Ashley ECS
-
 
         Gdx.gl.glClearColor(0.2f, 0.4f, 0.6f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
