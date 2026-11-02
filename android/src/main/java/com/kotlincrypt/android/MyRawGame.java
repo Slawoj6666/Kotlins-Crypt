@@ -32,7 +32,7 @@ public class MyRawGame implements ApplicationListener {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-        font.draw(batch, "Ashley ECS & SquidGrid Active!", 100, 300);
+        font.draw(batch, "cos działa", 100, 300);
         batch.end();
     }
 
