@@ -8,7 +8,8 @@ import com.github.yellowstonegames.grid.Region
 import com.github.yellowstonegames.path.DijkstraMap
 import com.github.yellowstonegames.place.DungeonProcessor
 
-enum class TurnState {
+enum class TurnState
+{
     AWAITING_INPUT,
     PLAYER_MOVING,
     ENEMY_TURN,
@@ -16,7 +17,8 @@ enum class TurnState {
     END_OF_TURN
 }
 
-class PlayerGridWorld(val width: Int = 32, val height: Int = 32) {
+class PlayerGridWorld(val width: Int = 32, val height: Int = 32)
+{
 
     val dungeonMap: Array<CharArray> = DungeonProcessor(width, height).generate()
     val fovMap = Array(width) { FloatArray(height) }
@@ -33,21 +35,25 @@ class PlayerGridWorld(val width: Int = 32, val height: Int = 32) {
     var turnState = TurnState.AWAITING_INPUT
     var turnCount = 1
 
-    init {
+    init
+    {
         updateFOV()
     }
 
-    private fun findStartFloor(): Coord {
+    private fun findStartFloor(): Coord
+    {
         return Region(dungeonMap, '.').first() ?: Coord.get(1,1);
     }
 
-    fun updateFOV() {
+    fun updateFOV()
+    {
         FOV.reuseFOV(resistanceMap, fovMap, playerGridPos.x.toInt(), playerGridPos.y.toInt(), 8.5f)
         visibleRegion.refill(fovMap, 0.001f, 1f)
         exploredMap.or(visibleRegion)
     }
 
-    fun handleTapAt(target: Coord) {
+    fun handleTapAt(target: Coord)
+    {
         if (target.x !in 0 until width || target.y !in 0 until height) return
 
         if (target == playerGridPos)
@@ -68,25 +74,30 @@ class PlayerGridWorld(val width: Int = 32, val height: Int = 32) {
         startNextStep()
     }
 
-    fun startNextStep() {
-        if (pathQueue.isNotEmpty()) {
+    fun startNextStep()
+    {
+        if (pathQueue.isNotEmpty())
+        {
             playerGridPos = pathQueue.removeAt(0)
             updateFOV()
             turnState = TurnState.PLAYER_MOVING
         }
     }
 
-    fun processEnemyTurn() {
+    fun processEnemyTurn()
+    {
 
         turnState = TurnState.ENEMY_MOVING
     }
 
-    fun areEnemiesFinishedMoving(): Boolean {
+    fun areEnemiesFinishedMoving(): Boolean
+    {
 
         return true
     }
 
-    fun finishTurn() {
+    fun finishTurn()
+    {
         turnCount++
         if (pathQueue.isNotEmpty()) {
             startNextStep()

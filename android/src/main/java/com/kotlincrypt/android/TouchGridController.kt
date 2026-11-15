@@ -15,11 +15,14 @@ class TouchGridController(
 
     private val touchPos = Vector3()
 
-    override fun tap(x: Float, y: Float, count: Int, button: Int): Boolean {
-        if (world.pathQueue.isNotEmpty()) {
+    override fun tap(x: Float, y: Float, count: Int, button: Int): Boolean
+    {
+        if (world.pathQueue.isNotEmpty())
+        {
             world.pathQueue.clear()
             return true
         }
+
         if (world.turnState != TurnState.AWAITING_INPUT) return false
 
         touchPos.set(x, y, 0f)
@@ -28,7 +31,8 @@ class TouchGridController(
         return true
     }
 
-    override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean {
+    override fun pan(x: Float, y: Float, deltaX: Float, deltaY: Float): Boolean
+    {
         camera.position.add(
             -deltaX * (viewport.worldWidth / Gdx.graphics.width),
             deltaY * (viewport.worldHeight / Gdx.graphics.height),

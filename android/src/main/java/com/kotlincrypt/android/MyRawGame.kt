@@ -52,16 +52,20 @@ class MyRawGame : ApplicationListener {
         Gdx.input.inputProcessor = GestureDetector(TouchGridController(viewport, camera, world))
     }
 
-    private fun update(delta: Float) {
-        when (world.turnState) {
+    private fun update(delta: Float)
+    {
+        when (world.turnState)
+        {
             TurnState.AWAITING_INPUT -> Unit
 
             TurnState.PLAYER_MOVING -> {
+
                 val targetX = world.playerGridPos.x.toFloat()
                 val targetY = world.playerGridPos.y.toFloat()
                 world.playerVisualPos.lerp(Vector2(targetX, targetY), 25f * delta)
 
-                if (world.playerVisualPos.dst2(targetX, targetY) < 0.002f) {
+                if (world.playerVisualPos.dst2(targetX, targetY) < 0.002f)
+                {
                     world.playerVisualPos.set(targetX, targetY)
                     camera.position.set(targetX + 0.5f, targetY + 0.5f, 0f)
                     world.turnState = TurnState.ENEMY_TURN
@@ -85,7 +89,8 @@ class MyRawGame : ApplicationListener {
         }
     }
 
-    override fun render() {
+    override fun render()
+    {
         update(Gdx.graphics.deltaTime)
 
         Gdx.gl.glClearColor(0.05f, 0.05f, 0.08f, 1f)
@@ -120,7 +125,8 @@ class MyRawGame : ApplicationListener {
     override fun pause() {}
     override fun resume() {}
 
-    override fun dispose() {
+    override fun dispose()
+    {
         batch.dispose()
         floorTex.dispose()
         wallTex.dispose()
