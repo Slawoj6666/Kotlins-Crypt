@@ -92,7 +92,6 @@ class PlayerGridWorld(val width: Int = 32, val height: Int = 32)
 
     fun areEnemiesFinishedMoving(): Boolean
     {
-
         return true
     }
 
