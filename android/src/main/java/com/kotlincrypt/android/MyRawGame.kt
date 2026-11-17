@@ -1,11 +1,13 @@
 package com.kotlincrypt.android
 
 import com.badlogic.gdx.ApplicationListener
+import android.util.Log
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.input.GestureDetector
@@ -13,6 +15,10 @@ import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 
 class MyRawGame : ApplicationListener {
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 
     private lateinit var batch: SpriteBatch
     private lateinit var camera: OrthographicCamera

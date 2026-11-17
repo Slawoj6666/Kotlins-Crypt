@@ -42,7 +42,7 @@ class PlayerGridWorld(val width: Int = 32, val height: Int = 32)
 
     private fun findStartFloor(): Coord
     {
-        return Region(dungeonMap, '.').first() ?: Coord.get(1,1);
+        return Region(dungeonMap, '.').first()
     }
 
     fun updateFOV()
