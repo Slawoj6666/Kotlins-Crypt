@@ -28,32 +28,20 @@ class MyRawGame : ApplicationListener {
     private lateinit var wallTex: Texture
     private lateinit var playerTex: Texture
 
-    private lateinit var floorRegion: TextureRegion
-    private lateinit var wallRegion: TextureRegion
-    private lateinit var playerRegion: TextureRegion
 
     private lateinit var world: PlayerGridWorld
 
     override fun create() {
         batch = SpriteBatch()
+        world = PlayerGridWorld()
         camera = OrthographicCamera()
         viewport = ExtendViewport(15f, 15f, camera)
 
-        floorTex = Texture(Gdx.files.internal("floor.png")).apply {
-            setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
-        }
-        wallTex = Texture(Gdx.files.internal("wall.png")).apply {
-            setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
-        }
-        playerTex = Texture(Gdx.files.internal("player.png")).apply {
-            setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest)
-        }
+        floorTex = Texture(Gdx.files.internal("floor.png"));
+        wallTex = Texture(Gdx.files.internal("wall.png"));
+        playerTex = Texture(Gdx.files.internal("player.png"));
 
-        floorRegion = TextureRegion(floorTex)
-        wallRegion = TextureRegion(wallTex)
-        playerRegion = TextureRegion(playerTex)
 
-        world = PlayerGridWorld()
         camera.position.set(world.playerVisualPos.x + 0.5f, world.playerVisualPos.y + 0.5f, 0f)
         Gdx.input.inputProcessor = GestureDetector(TouchGridController(viewport, camera, world))
     }
@@ -62,7 +50,9 @@ class MyRawGame : ApplicationListener {
     {
         when (world.turnState)
         {
-            TurnState.AWAITING_INPUT -> Unit
+            TurnState.AWAITING_INPUT -> {
+
+            }
 
             TurnState.PLAYER_MOVING -> {
 
@@ -112,18 +102,23 @@ class MyRawGame : ApplicationListener {
             {
                 val visible = world.fovMap[x][y] > 0f
 
-                if (!visible && !world.exploredMap.contains(x, y)) continue
+                if (!visible && !world.exploredMap.contains(x, y)){
+                    continue
+                }
 
-                batch.color = if (visible) Color.WHITE else Color.DARK_GRAY
+                batch.color = if(visible) {
+                    Color.WHITE
+                } else Color.DARK_GRAY
 
-                val region = if (world.dungeonMap[x][y] == '#') wallRegion else floorRegion
-
+                val region = if (world.dungeonMap[x][y] == '#') {
+                    wallTex
+                } else floorTex
                 batch.draw(region, x.toFloat(), y.toFloat(), 1f, 1f)
             }
         }
 
         batch.color = Color.WHITE
-        batch.draw(playerRegion, world.playerVisualPos.x, world.playerVisualPos.y, 1f, 1f)
+        batch.draw(playerTex, world.playerVisualPos.x, world.playerVisualPos.y, 1f, 1f)
         batch.end()
     }
 
